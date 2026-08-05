@@ -11,6 +11,7 @@ Hard rules:
 - Run typecheck, all 36 unit tests, production build, and all three Playwright journeys before pushing.
 - Update README, CHANGELOG, BUGS, ROADMAP, CLAUDE, `llms.txt`, and `llms-full.txt` with every behavior change.
 - Push once and deploy once per task.
+- Keep Railway watch paths scoped to production-relevant files so CI and documentation maintenance do not redeploy the site.
 - Save browser screenshots under `/Users/emmanuel/Developer/scratch/playwright-screenshots/`, never in the repository.
 - Never use em dashes in project copy.
 

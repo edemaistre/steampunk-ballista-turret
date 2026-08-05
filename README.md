@@ -1,6 +1,6 @@
 # Steampunk Ballista Turret
 
-**Public site:** use the Railway production URL shown in this GitHub repository's homepage field.
+**Public site:** https://ballista-production.up.railway.app
 
 **Resume this work:** `claude --resume 019fcece-c58b-72b0-8941-5e6524eaaa41` (2026-08-05)
 
@@ -57,6 +57,8 @@ The public repository is `https://github.com/edemaistre/steampunk-ballista-turre
 
 Railway builds the Vite application with `npm run build`, serves `dist/` through `serve`, checks `/` before switching traffic, and redeploys from `main`. GitHub Actions independently runs typecheck, 36 unit tests, the production build, and three Playwright journeys.
 
+Railway watch paths limit production builds to runtime, asset, package, TypeScript, Vite, and Railway configuration changes. Documentation and CI-only commits therefore do not consume a production deployment.
+
 Rollback uses Railway's deployment history. Select the last healthy deployment and redeploy it without rewriting Git history.
 
 ## Key files
@@ -71,6 +73,11 @@ Rollback uses Railway's deployment history. Select the last healthy deployment a
 - `e2e/`: Playwright desktop, mobile, interaction, and visual journeys.
 - `.github/workflows/ci.yml`: GitHub verification pipeline.
 - `railway.toml`: Railway build, start, health, and restart policy.
+
+## Version history
+
+- `2026-08-05`: initial clean public release. Historical reconstruction iterations remain preserved in the original local source project.
+- `2026-08-05 Pre CI Fix`: local-only snapshot created before correcting the GitHub Actions temporary screenshot path.
 
 ## Truth boundary
 

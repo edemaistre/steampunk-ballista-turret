@@ -7,6 +7,7 @@
 
 ## Resolved
 
+- GitHub Actions no longer evaluates the runner-only temporary-directory context before a runner exists. Browser evidence now uses a stable Linux temporary path.
 - The final reference viewer now uses the cleaned source without the removed scope and upper-left black part.
 - Bow direction, pod closure, chain clearance, bilateral fasteners, aiming ranges, reset behavior, and the explicit loading cycle are covered by regression tests and browser journeys.
 - Railway receives an explicit start command, listens on `$PORT`, and checks `/` before promoting a deployment.

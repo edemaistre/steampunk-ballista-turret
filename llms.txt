@@ -8,4 +8,4 @@ Runtime: 245 physical mesh instances, 16,062 triangle faces, 28 semantic sculpt 
 
 Truth boundary: code-built single-image reconstruction. Hidden geometry is inferred, projectile travel is visual, and no physics engine or audio is included.
 
-Public site: Railway production URL in the GitHub repository homepage field.
+Public site: https://ballista-production.up.railway.app

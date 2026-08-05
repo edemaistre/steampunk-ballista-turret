@@ -17,6 +17,11 @@
 - Explicit Fire and Crank & Load actions with stable loaded and unloaded states.
 - Zero-centered pitch, full yaw, complete reset, responsive controls, and unified utility actions.
 
+### Fixed
+
+- Corrected the GitHub Actions screenshot path so workflow validation can create the verification job.
+- Limited Railway GitHub autodeploys to production-relevant paths, avoiding deployments for documentation and CI-only changes.
+
 ### Preservation
 
 - Historical iterations remain archived locally and are intentionally excluded from the public repository.

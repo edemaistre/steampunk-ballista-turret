@@ -10,8 +10,8 @@ Firing releases the string, relaxes the limbs, launches the projectile, fades a 
 
 Verification includes strict TypeScript, 36 Vitest tests, a production build, and three Playwright journeys covering desktop interactions, mobile layout, model views, the exact cleaned source asset, and browser-generated GLB download.
 
-Railway builds the Vite output, serves it on the injected port, checks `/` for readiness, and redeploys from the public GitHub `main` branch. GitHub Actions runs the full verification suite independently.
+Railway builds the Vite output, serves it on the injected port, checks `/` for readiness, and redeploys production-relevant changes from the public GitHub `main` branch. GitHub Actions runs the full verification suite independently. Documentation and CI-only commits are excluded from Railway autodeploys.
 
 The source provides one three-quarter view. Hidden rear, underside, occluded joins, and internal mechanics are therefore informed approximations. Projectile travel is deterministic rather than physics-driven. The GLB exporter omits unsupported generated roughness maps while preserving generated color maps and scalar material response.
 
-Public site: Railway production URL in the GitHub repository homepage field.
+Public site: https://ballista-production.up.railway.app
