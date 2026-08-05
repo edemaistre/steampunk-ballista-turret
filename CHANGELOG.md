@@ -20,6 +20,7 @@
 ### Fixed
 
 - Corrected the GitHub Actions screenshot path so workflow validation can create the verification job.
+- Increased the two screenshot-heavy Playwright time budgets for slower software WebGL rendering on GitHub runners.
 - Limited Railway GitHub autodeploys to production-relevant paths, avoiding deployments for documentation and CI-only changes.
 
 ### Preservation

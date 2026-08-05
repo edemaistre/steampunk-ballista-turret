@@ -9,7 +9,7 @@
 - Local GLB export.
 - Clean public GitHub edition.
 - Railway production deployment with healthcheck.
-- Green GitHub Actions verification with retained Playwright evidence.
+- Green GitHub Actions verification with retained Playwright evidence and software-rendering-safe time budgets.
 
 ## Possible next work
 

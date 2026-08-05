@@ -78,6 +78,7 @@ Rollback uses Railway's deployment history. Select the last healthy deployment a
 
 - `2026-08-05`: initial clean public release. Historical reconstruction iterations remain preserved in the original local source project.
 - `2026-08-05 Pre CI Fix`: local-only snapshot created before correcting the GitHub Actions temporary screenshot path.
+- `2026-08-05 Pre CI Timeout Fix`: local-only snapshot created before adapting screenshot-heavy test time budgets for shared runners.
 
 ## Truth boundary
 

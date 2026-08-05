@@ -9,6 +9,7 @@ Hard rules:
 - Do not reintroduce `versions/`, historical crops, stopped pipeline evidence, or superseded source images into this public repository.
 - Preserve the current cleaned reference image unless Emmanuel explicitly supplies a replacement.
 - Run typecheck, all 36 unit tests, production build, and all three Playwright journeys before pushing.
+- Preserve the extended Playwright time budgets required by software WebGL on shared GitHub runners.
 - Update README, CHANGELOG, BUGS, ROADMAP, CLAUDE, `llms.txt`, and `llms-full.txt` with every behavior change.
 - Push once and deploy once per task.
 - Keep Railway watch paths scoped to production-relevant files so CI and documentation maintenance do not redeploy the site.

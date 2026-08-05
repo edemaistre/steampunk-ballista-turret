@@ -7,6 +7,7 @@
 
 ## Resolved
 
+- The two screenshot-heavy WebGL journeys now allow for slower software rendering on shared GitHub runners instead of timing out near completion.
 - GitHub Actions no longer evaluates the runner-only temporary-directory context before a runner exists. Browser evidence now uses a stable Linux temporary path.
 - The final reference viewer now uses the cleaned source without the removed scope and upper-left black part.
 - Bow direction, pod closure, chain clearance, bilateral fasteners, aiming ranges, reset behavior, and the explicit loading cycle are covered by regression tests and browser journeys.

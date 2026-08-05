@@ -7,7 +7,7 @@ const screenshotRoot = runtimeProcess.process?.env?.BALLISTA_SCREENSHOT_ROOT
   ?? '/Users/emmanuel/Developer/scratch/playwright-screenshots';
 
 test('inspects and operates the ballista in dark and light modes', async ({ page }) => {
-  test.setTimeout(90_000);
+  test.setTimeout(300_000);
   await page.goto('/');
   await expect(page.getByRole('heading', { name: 'Steampunk Ballista' })).toBeVisible();
   await expect(page.locator('canvas')).toBeVisible();
@@ -156,7 +156,7 @@ test('keeps the controls usable on a narrow viewport', async ({ page }) => {
 });
 
 test('captures the v2 hero geometry from meaningful review views', async ({ page }) => {
-  test.setTimeout(60_000);
+  test.setTimeout(180_000);
   await page.setViewportSize({ width: 1000, height: 1000 });
   await page.goto('/?review=visual', { waitUntil: 'domcontentloaded' });
   const canvas = page.locator('canvas');
