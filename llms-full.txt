@@ -1,0 +1,17 @@
+# Steampunk Ballista Turret, complete context
+
+This repository contains the one final public edition of Emmanuel de Maistre's procedural steampunk ballista. Historical snapshots, superseded images, reconstruction crops, and stopped workflow evidence remain archived locally and are intentionally absent here.
+
+The application is built with Vite, TypeScript, and Three.js. It supports orbit, zoom, semantic part selection, -180° to +180° yaw, -20° to +20° pitch, exploded view, a separate firing and crank-loading cycle, complete reset, dark and light presentation, source-image inspection, local GLB export, and a responsive mobile interface.
+
+The model contains 245 physical mesh instances and 16,062 triangle faces. Its runtime hierarchy exposes 28 semantic sculpt nodes, 13 user-facing selectable systems, four named sockets, collider descriptors, and destruction groups. Geometry and materials are generated in code. No third-party 3D model is included.
+
+Firing releases the string, relaxes the limbs, launches the projectile, fades a speed trail, and recoils the carriage. It does not move the crank, rear gear, or winch. Crank & Load operates those loading systems and seats a replacement bolt before Fire becomes available again.
+
+Verification includes strict TypeScript, 36 Vitest tests, a production build, and three Playwright journeys covering desktop interactions, mobile layout, model views, the exact cleaned source asset, and browser-generated GLB download.
+
+Railway builds the Vite output, serves it on the injected port, checks `/` for readiness, and redeploys from the public GitHub `main` branch. GitHub Actions runs the full verification suite independently.
+
+The source provides one three-quarter view. Hidden rear, underside, occluded joins, and internal mechanics are therefore informed approximations. Projectile travel is deterministic rather than physics-driven. The GLB exporter omits unsupported generated roughness maps while preserving generated color maps and scalar material response.
+
+Public site: Railway production URL in the GitHub repository homepage field.

@@ -1,0 +1,11 @@
+# Steampunk Ballista Turret
+
+Public interactive Vite, TypeScript, and Three.js reconstruction of a stylized steampunk ballista.
+
+Capabilities: orbit, zoom, part selection, full yaw, horizontal-centered pitch, exploded view, separate Fire and Crank & Load actions, complete reset, dark and light modes, cleaned source viewer, local GLB download, and responsive mobile controls.
+
+Runtime: 245 physical mesh instances, 16,062 triangle faces, 28 semantic sculpt nodes, 13 selectable systems, four named sockets, and per-component collider and destruction metadata.
+
+Truth boundary: code-built single-image reconstruction. Hidden geometry is inferred, projectile travel is visual, and no physics engine or audio is included.
+
+Public site: Railway production URL in the GitHub repository homepage field.

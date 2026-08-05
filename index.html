@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0e1723">
+    <meta name="description" content="Interactive procedural reconstruction of a stylized steampunk ballista turret.">
+    <title>Steampunk Ballista Turret</title>
+  </head>
+  <body>
+    <main class="app-shell">
+      <div class="identity-stack">
+        <div class="identity-frame">
+          <header class="identity-plate">
+            <p class="unit-code"><span>Field unit</span> STB-06</p>
+            <h1><span>Steampunk</span><span>Ballista</span></h1>
+            <p class="identity-note">Procedural reconstruction · hidden mechanisms approximated</p>
+            <dl class="asset-stats" aria-label="Model statistics">
+              <div><dt>Parts</dt><dd data-stat="parts">0</dd></div>
+              <div><dt>Faces</dt><dd data-stat="faces">0</dd></div>
+            </dl>
+          </header>
+          <aside id="reference-mount" class="reference-mount" hidden></aside>
+        </div>
+      </div>
+      <div id="reference-modal-mount" class="reference-modal-mount" hidden></div>
+
+      <section class="viewport" aria-label="Interactive 3D ballista viewer">
+        <div id="scene-mount" class="scene-mount"></div>
+        <div class="reticle" aria-hidden="true"><i></i><b></b></div>
+        <p id="loading-status" class="loading-status" role="status" aria-live="polite">Forging assembly</p>
+        <p class="gesture-hint">Drag to orbit · Scroll to zoom · Click a part to inspect</p>
+        <div id="webgl-error" class="webgl-error" hidden>
+          <strong>3D view unavailable</strong>
+          <span>Enable WebGL or open this page in a current browser.</span>
+        </div>
+      </section>
+
+      <aside id="control-mount" class="control-mount"></aside>
+      <footer class="build-stamp">
+        <span>Three.js procedural asset</span>
+        <span>13 selectable systems</span>
+      </footer>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
