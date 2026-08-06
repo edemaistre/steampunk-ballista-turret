@@ -26,3 +26,8 @@
 ### Preservation
 
 - Historical iterations remain archived locally and are intentionally excluded from the public repository.
+
+### Documentation
+
+- Added a one-page A4 CTO brief covering the reconstruction pipeline, architecture, corrections, QA, deployment, and trust boundary.
+- Added a reproducible ReportLab generator with clickable production links, a QR code, and optimized image embedding.

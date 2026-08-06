@@ -166,6 +166,8 @@ src/export/
 - `e2e/ballista.spec.ts`: three Playwright interaction and visual journeys.
 - `.github/workflows/ci.yml`: public CI pipeline.
 - `railway.toml`: Railpack build, start, healthcheck, and restart configuration.
+- `scripts/build_cto_brief.py`: reproducible ReportLab generator for the CTO one-pager.
+- `output/pdf/steampunk-ballista-cto-brief.pdf`: shareable one-page executive and technical summary.
 - `docs/interface-design.md`: interface design direction and responsive decisions.
 - `docs/DEPLOYMENT.md`: production and rollback procedure.
 
@@ -227,6 +229,24 @@ Important production evidence includes:
 - `steampunk-ballista-v2-fasteners-left.png`
 - `steampunk-ballista-v2-fasteners-right.png`
 - `steampunk-ballista-v2-no-scope.png`
+
+## CTO one-page brief
+
+The shareable CTO briefing is:
+
+```text
+output/pdf/steampunk-ballista-cto-brief.pdf
+```
+
+It is a single A4 landscape page covering the input, result, pipeline, engineering scope, critical refinements, delivery metrics, production architecture, and trust boundary. The live site and public repository are clickable, and the QR code opens the production URL.
+
+Regenerate it with:
+
+```bash
+python3 scripts/build_cto_brief.py
+```
+
+The generator uses the verified production screenshot from the external screenshot folder when available and falls back to the committed reference image. Images are cropped and downsampled during generation, keeping the final PDF near 115 KB without reducing page-level legibility.
 
 ## Deployment and operations
 
@@ -363,3 +383,5 @@ Assumed or limited:
 - `2026-08-05 Pre CI Fix`: local-only snapshot before correcting the GitHub Actions temporary screenshot path.
 - `2026-08-05 Pre CI Timeout Fix`: local-only snapshot before adapting screenshot-heavy tests for software WebGL on shared runners.
 - `v1 2026-08-06 Pre Documentation Handoff`: local-only snapshot of the original short README and CLAUDE files before this comprehensive human and agent handoff.
+- `v2 2026-08-06 Pre CTO Brief`: local-only documentation snapshot before adding the one-page CTO deliverable.
+- `v3 2026-08-06 Pre PDF Optimization`: local-only first PDF and generator snapshot before reducing the PDF from about 4.0 MB to about 115 KB.

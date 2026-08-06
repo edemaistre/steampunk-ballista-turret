@@ -72,4 +72,6 @@ Do not push if any required test fails. For visual changes, inspect the actual s
 
 High-value code paths and troubleshooting routes are documented in `README.md`.
 
+CTO handoff: generate `output/pdf/steampunk-ballista-cto-brief.pdf` with `python3 scripts/build_cto_brief.py`. Render and inspect the single page before replacing it.
+
 **Resume this work:** `claude --resume 019fcece-c58b-72b0-8941-5e6524eaaa41` (2026-08-05)
