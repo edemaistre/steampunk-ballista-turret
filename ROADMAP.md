@@ -10,7 +10,7 @@
 - Clean public GitHub edition.
 - Railway production deployment with healthcheck.
 - Green GitHub Actions verification with retained Playwright evidence and software-rendering-safe time budgets.
-- Shareable one-page CTO technical brief and reproducible PDF generator.
+- Shareable one-page `img2threejs` CTO case study and reproducible PDF generator.
 
 ## Possible next work
 

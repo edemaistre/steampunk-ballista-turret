@@ -29,5 +29,5 @@
 
 ### Documentation
 
-- Added a one-page A4 CTO brief covering the reconstruction pipeline, architecture, corrections, QA, deployment, and trust boundary.
+- Refocused the one-page A4 CTO brief on the `img2threejs` plugin: its bounded pipeline, generated evidence, correction-loop hard stop, explicit overrides, audit record, and production handoff.
 - Added a reproducible ReportLab generator with clickable production links, a QR code, and optimized image embedding.

@@ -238,7 +238,7 @@ The shareable CTO briefing is:
 output/pdf/steampunk-ballista-cto-brief.pdf
 ```
 
-It is a single A4 landscape page covering the input, result, pipeline, engineering scope, critical refinements, delivery metrics, production architecture, and trust boundary. The live site and public repository are clickable, and the QR code opens the production URL.
+It is a single A4 landscape case study centered on the `img2threejs` plugin. It shows the five-stage bounded pipeline, the concrete evidence it produced, the honest hard stop after three blockout correction loops, the two explicit human overrides, and the boundary between plugin output and manual V2 production work. The page closes with structural coverage, automated QA, public delivery, and the reason this auditability matters to a CTO. The live site and public repository are clickable, and the QR code opens the production URL.
 
 Regenerate it with:
 
@@ -246,7 +246,7 @@ Regenerate it with:
 python3 scripts/build_cto_brief.py
 ```
 
-The generator uses the verified production screenshot from the external screenshot folder when available and falls back to the committed reference image. Images are cropped and downsampled during generation, keeping the final PDF near 115 KB without reducing page-level legibility.
+The generator uses the verified production screenshot from the external screenshot folder when available and falls back to the committed reference image. Images are cropped and downsampled during generation, keeping the final PDF near 75 KB without reducing page-level legibility.
 
 ## Deployment and operations
 
@@ -385,3 +385,4 @@ Assumed or limited:
 - `v1 2026-08-06 Pre Documentation Handoff`: local-only snapshot of the original short README and CLAUDE files before this comprehensive human and agent handoff.
 - `v2 2026-08-06 Pre CTO Brief`: local-only documentation snapshot before adding the one-page CTO deliverable.
 - `v3 2026-08-06 Pre PDF Optimization`: local-only first PDF and generator snapshot before reducing the PDF from about 4.0 MB to about 115 KB.
+- `v4 2026-08-06 Pre Img2threejs CTO Refocus`: local-only snapshot of the first result-centered CTO brief before rebuilding it as an `img2threejs` workflow case study.

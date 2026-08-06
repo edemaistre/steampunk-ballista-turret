@@ -213,14 +213,87 @@ def draw_qr(c: canvas.Canvas, url: str, x: float, y: float, size: float) -> None
     c.linkURL(url, (x - 3, y - 3, x + size + 3, y + size + 3), relative=0)
 
 
+def draw_stage(
+    c: canvas.Canvas,
+    number: str,
+    title: str,
+    body: str,
+    x: float,
+    y: float,
+    width: float,
+    height: float,
+    accent: Color,
+) -> None:
+    """Draw one compact img2threejs pipeline stage."""
+    draw_panel(c, x, y, width, height, fill=PANEL_ALT)
+    c.setFillColor(accent)
+    c.setFont("Helvetica-Bold", 6.2)
+    c.drawString(x + 8, y + height - 15, number)
+    c.setFillColor(TEXT)
+    c.setFont("Helvetica-Bold", 8.2)
+    c.drawString(x + 8, y + height - 29, title)
+    c.setStrokeColor(BORDER)
+    c.line(x + 8, y + height - 36, x + width - 8, y + height - 36)
+    draw_wrapped(
+        c,
+        body,
+        x + 8,
+        y + height - 49,
+        width - 16,
+        size=6.2,
+        leading=7.7,
+        color=MUTED,
+        max_lines=5,
+    )
+
+
+def draw_text_column(
+    c: canvas.Canvas,
+    kicker: str,
+    title: str,
+    bullets: Iterable[str],
+    x: float,
+    y: float,
+    width: float,
+    height: float,
+    accent: Color,
+) -> None:
+    """Draw a compact evidence column for the plugin handoff story."""
+    draw_panel(c, x, y, width, height)
+    c.setFillColor(accent)
+    c.setFont("Helvetica-Bold", 6.2)
+    c.drawString(x + 13, y + height - 17, kicker)
+    c.setFillColor(TEXT)
+    c.setFont("Helvetica-Bold", 10)
+    c.drawString(x + 13, y + height - 33, title)
+    c.setStrokeColor(BORDER)
+    c.line(x + 13, y + height - 42, x + width - 13, y + height - 42)
+
+    cursor_y = y + height - 58
+    for bullet in bullets:
+        c.setFillColor(accent)
+        c.circle(x + 17, cursor_y + 2.1, 1.5, fill=1, stroke=0)
+        cursor_y = draw_wrapped(
+            c,
+            bullet,
+            x + 25,
+            cursor_y,
+            width - 39,
+            size=6.9,
+            leading=8.7,
+            color=TEXT,
+        )
+        cursor_y -= 3.5
+
+
 def build_pdf(output: Path, live_image: Path) -> None:
-    """Generate the final single-page CTO briefing PDF."""
+    """Generate the final img2threejs-centered CTO case study."""
     output.parent.mkdir(parents=True, exist_ok=True)
     page_width, page_height = landscape(A4)
     c = canvas.Canvas(str(output), pagesize=(page_width, page_height))
-    c.setTitle("Steampunk Ballista Turret - CTO Brief")
+    c.setTitle("img2threejs - Steampunk Ballista CTO Case Study")
     c.setAuthor("Emmanuel de Maistre")
-    c.setSubject("Single-page technical delivery summary")
+    c.setSubject("Quality-gated image-to-procedural-3D workflow and production handoff")
 
     c.setFillColor(BG)
     c.rect(0, 0, page_width, page_height, fill=1, stroke=0)
@@ -228,113 +301,130 @@ def build_pdf(output: Path, live_image: Path) -> None:
     margin = 30
     c.setFillColor(GOLD)
     c.setFont("Helvetica-Bold", 7)
-    c.drawString(margin, page_height - 28, "FIELD UNIT STB-06  /  CTO DELIVERY BRIEF  /  06 AUG 2026")
+    c.drawString(margin, page_height - 27, "IMG2THREEJS WORKFLOW CASE STUDY  /  FIELD UNIT STB-06  /  06 AUG 2026")
 
     c.setFillColor(TEXT)
-    c.setFont("Helvetica-Bold", 25)
-    c.drawString(margin, page_height - 57, "From one image to a production-ready interactive 3D asset")
+    c.setFont("Helvetica-Bold", 23)
+    c.drawString(margin, page_height - 56, "img2threejs: one image to a production-ready interactive 3D asset")
     c.setFillColor(MUTED)
-    c.setFont("Helvetica", 9)
+    c.setFont("Helvetica", 8.6)
     c.drawString(
         margin,
-        page_height - 75,
-        "Steampunk Ballista Turret  |  Vite + TypeScript + Three.js  |  Procedural geometry, mechanics, QA and deployment",
+        page_height - 73,
+        "A quality-gated, code-only reconstruction workflow with bounded autonomy, preserved evidence and an explicit human handoff",
     )
 
     c.setFillColor(TEAL)
-    c.roundRect(page_width - 125, page_height - 38, 95, 20, 10, fill=1, stroke=0)
+    c.roundRect(page_width - 137, page_height - 38, 107, 20, 10, fill=1, stroke=0)
     c.setFillColor(BLACK)
     c.setFont("Helvetica-Bold", 7)
-    c.drawCentredString(page_width - 77.5, page_height - 31, "LIVE + VERIFIED")
+    c.drawCentredString(page_width - 83.5, page_height - 31, "PLUGIN-CENTERED BRIEF")
 
-    pipeline_y = page_height - 94
-    pipeline = [
-        "REFERENCE",
-        "IMG2THREEJS GATES",
-        "MANUAL V2 REFINEMENT",
-        "AUTOMATED QA",
-        "GITHUB + RAILWAY",
-    ]
-    pipeline_x = margin
-    c.setFont("Helvetica-Bold", 6.3)
-    for index, label in enumerate(pipeline):
-        label_width = stringWidth(label, "Helvetica-Bold", 6.3)
-        c.setFillColor(GOLD if index == 0 else TEAL)
-        c.drawString(pipeline_x, pipeline_y, label)
-        pipeline_x += label_width + 9
-        if index < len(pipeline) - 1:
-            c.setStrokeColor(BORDER)
-            c.setLineWidth(1)
-            c.line(pipeline_x, pipeline_y + 2, pipeline_x + 18, pipeline_y + 2)
-            c.setFillColor(BORDER)
-            c.circle(pipeline_x + 18, pipeline_y + 2, 1.8, fill=1, stroke=0)
-            pipeline_x += 27
-
-    visual_y = 332
-    visual_h = 166
+    visual_y = 322
+    visual_h = 184
     source_x = margin
-    source_w = 180
+    source_w = 142
     draw_panel(c, source_x, visual_y, source_w, visual_h)
-    draw_cover_image(c, REFERENCE_IMAGE, source_x + 8, visual_y + 27, source_w - 16, visual_h - 35)
+    draw_cover_image(c, REFERENCE_IMAGE, source_x + 8, visual_y + 45, source_w - 16, visual_h - 54)
     c.setFillColor(GOLD)
-    c.setFont("Helvetica-Bold", 6.5)
-    c.drawString(source_x + 10, visual_y + 11, "INPUT  /  SINGLE STYLIZED REFERENCE")
-
-    result_x = 225
-    result_w = 355
-    draw_panel(c, result_x, visual_y, result_w, visual_h)
-    draw_cover_image(c, live_image, result_x + 8, visual_y + 27, result_w - 16, visual_h - 35)
-    c.setFillColor(TEAL)
-    c.setFont("Helvetica-Bold", 6.5)
-    c.drawString(result_x + 10, visual_y + 11, "OUTPUT  /  LIVE INTERACTIVE BROWSER ASSET")
-
-    c.setStrokeColor(CORAL)
-    c.setLineWidth(2)
-    c.line(source_x + source_w + 7, visual_y + visual_h / 2, result_x - 7, visual_y + visual_h / 2)
-    c.setFillColor(CORAL)
-    c.circle(result_x - 7, visual_y + visual_h / 2, 2.5, fill=1, stroke=0)
-
-    summary_x = 596
-    summary_w = page_width - margin - summary_x
-    draw_panel(c, summary_x, visual_y, summary_w, visual_h, fill=PANEL_ALT)
-    c.setFillColor(GOLD)
-    c.setFont("Helvetica-Bold", 7)
-    c.drawString(summary_x + 14, visual_y + visual_h - 19, "EXECUTIVE SUMMARY")
-    summary_y = draw_wrapped(
-        c,
-        "Starting from one stylized render, we built a complete code-generated 3D asset and inspection experience. The final system includes mechanical state, semantic metadata, export, automated QA, and a live public deployment.",
-        summary_x + 14,
-        visual_y + visual_h - 39,
-        summary_w - 28,
-        size=8.2,
-        leading=11,
-        color=TEXT,
-    )
-    c.setStrokeColor(BORDER)
-    c.line(summary_x + 14, summary_y - 1, summary_x + summary_w - 14, summary_y - 1)
-    c.setFillColor(TEAL)
-    c.setFont("Helvetica-Bold", 7)
-    c.drawString(summary_x + 14, summary_y - 18, "OUTCOME")
+    c.setFont("Helvetica-Bold", 6.2)
+    c.drawString(source_x + 10, visual_y + 29, "INPUT  /  ONE REFERENCE")
     draw_wrapped(
         c,
-        "Code-only model. No runtime secrets. No third-party 3D asset. Production URL returns HTTP 200.",
-        summary_x + 14,
-        summary_y - 32,
-        summary_w - 28,
-        size=7.5,
-        leading=10,
+        "Visible art direction. Hidden geometry declared approximate.",
+        source_x + 10,
+        visual_y + 17,
+        source_w - 20,
+        size=5.8,
+        leading=6.7,
         color=MUTED,
+        max_lines=2,
+    )
+
+    pipeline_x = source_x + source_w + 10
+    pipeline_w = 466
+    draw_panel(c, pipeline_x, visual_y, pipeline_w, visual_h, fill=BLACK)
+    c.setFillColor(TEAL)
+    c.setFont("Helvetica-Bold", 6.4)
+    c.drawString(pipeline_x + 12, visual_y + visual_h - 17, "THE IMG2THREEJS BOUNDED PIPELINE")
+    c.setFillColor(TEXT)
+    c.setFont("Helvetica-Bold", 7.2)
+    c.drawRightString(
+        pipeline_x + pipeline_w - 12,
+        visual_y + visual_h - 17,
+        "STAGED RECONSTRUCTION, NOT ONE-SHOT MESH GENERATION",
+    )
+
+    stage_gap = 6
+    stage_w = (pipeline_w - 24 - 4 * stage_gap) / 5
+    stage_y = visual_y + 49
+    stage_h = 104
+    stages = [
+        ("01", "OBSERVE", "Macro-to-micro image analysis; visible facts separated from hidden-side inference.", GOLD),
+        ("02", "CONTRACT", "Suitability, complexity, quality contract, detail inventory and PBR evidence.", TEAL),
+        ("03", "SPEC", "27-component hierarchy with materials, pivots, sockets and action anchors.", CORAL),
+        ("04", "BUILD", "Pass-locked TypeScript and Three.js generation with deterministic scaffolding.", GOLD),
+        ("05", "REVIEW", "Browser captures, comparison sheets, diagnostics and recorded correction decisions.", TEAL),
+    ]
+    for index, (number, title, body, accent) in enumerate(stages):
+        draw_stage(
+            c,
+            number,
+            title,
+            body,
+            pipeline_x + 12 + index * (stage_w + stage_gap),
+            stage_y,
+            stage_w,
+            stage_h,
+            accent,
+        )
+
+    gate_y = visual_y + 10
+    gate_h = 28
+    gate_gap = 7
+    gate_w = (pipeline_w - 24 - 2 * gate_gap) / 3
+    gate_labels = [
+        ("HARD STOP", "blockout 3/3", CORAL, TEXT),
+        ("HUMAN AUTHORIZATION", "override + override v2", GOLD, BLACK),
+        ("AUDIT RECORD", "state remains stopped", TEAL, BLACK),
+    ]
+    for index, (kicker, label, fill, foreground) in enumerate(gate_labels):
+        gate_x = pipeline_x + 12 + index * (gate_w + gate_gap)
+        c.setFillColor(fill)
+        c.roundRect(gate_x, gate_y, gate_w, gate_h, 5, fill=1, stroke=0)
+        c.setFillColor(foreground)
+        c.setFont("Helvetica-Bold", 5.4)
+        c.drawString(gate_x + 8, gate_y + 17, kicker)
+        c.setFont("Helvetica-Bold", 7.3)
+        c.drawString(gate_x + 8, gate_y + 7, label)
+
+    result_x = pipeline_x + pipeline_w + 10
+    result_w = page_width - margin - result_x
+    draw_panel(c, result_x, visual_y, result_w, visual_h)
+    draw_cover_image(c, live_image, result_x + 8, visual_y + 45, result_w - 16, visual_h - 54)
+    c.setFillColor(TEAL)
+    c.setFont("Helvetica-Bold", 6.2)
+    c.drawString(result_x + 10, visual_y + 29, "OUTPUT  /  LIVE SYSTEM")
+    draw_wrapped(
+        c,
+        "Interactive, inspectable, animation-ready and GLB-exportable.",
+        result_x + 10,
+        visual_y + 17,
+        result_w - 20,
+        size=5.8,
+        leading=6.7,
+        color=MUTED,
+        max_lines=2,
     )
 
     metrics = [
-        ("245", "mesh instances", GOLD),
-        ("16,062", "triangle faces", TEAL),
-        ("28", "semantic nodes", CORAL),
-        ("36/36", "unit tests", GOLD),
-        ("3/3", "browser journeys", TEAL),
-        ("1", "production deploy", CORAL),
+        ("27/27", "specified parts built", GOLD),
+        ("28", "semantic nodes", TEAL),
+        ("3/3", "bounded loop hard stop", CORAL),
+        ("36/36", "unit tests passed", GOLD),
+        ("3/3", "browser journeys passed", TEAL),
     ]
-    metric_y = 275
+    metric_y = 264
     metric_h = 43
     gap = 8
     metric_w = (page_width - 2 * margin - gap * (len(metrics) - 1)) / len(metrics)
@@ -350,54 +440,57 @@ def build_pdf(output: Path, live_image: Path) -> None:
             accent,
         )
 
-    section_y = 104
-    section_h = 153
+    section_y = 101
+    section_h = 148
     section_gap = 10
     section_w = (page_width - 2 * margin - 2 * section_gap) / 3
-    draw_section(
+    draw_text_column(
         c,
-        "01",
-        "What we engineered",
+        "01  /  PLUGIN OUTPUTS",
+        "What img2threejs produced",
         [
-            "Procedural geometry and PBR-style materials authored in TypeScript.",
-            "28-node semantic hierarchy, four sockets, colliders and destruction groups.",
-            "Real yaw and pitch pivots, raycast selection and exploded view.",
-            "Browser-native binary GLB export and a responsive control surface.",
+            "Reference intake, suitability limits and macro-to-micro decomposition.",
+            "PBR evidence, quality contract and a strict 27-component sculpt specification.",
+            "Generated TypeScript scaffold, browser captures and comparison evidence.",
+            "Persistent state, pass locks and review history for a reproducible audit trail.",
         ],
         margin,
         section_y,
         section_w,
         section_h,
+        TEAL,
     )
-    draw_section(
+    draw_text_column(
         c,
-        "02",
-        "Critical refinements",
+        "02  /  CONTROLLED HANDOFF",
+        "The guardrail actually fired",
         [
-            "Corrected bow sweep and tangent-aligned endpoint clamps.",
-            "Closed the pod underside, rebuilt chains and added bilateral fasteners.",
-            "Separated Fire from Crank & Load with an explicit four-state cycle.",
-            "Centered pitch and yaw, completed Reset and removed the conflicting scope.",
+            "After three blockout corrections, the workflow stopped at its configured limit.",
+            "No state reset, silent bypass or false pass was used.",
+            "Emmanuel explicitly authorized override, then override v2, with every v1 file preserved.",
+            "The stopped state remains evidence of bounded autonomy, not a failed record to erase.",
         ],
         margin + section_w + section_gap,
         section_y,
         section_w,
         section_h,
+        CORAL,
     )
-    draw_section(
+    draw_text_column(
         c,
-        "03",
-        "Production delivery",
+        "03  /  PRODUCTION HANDOFF",
+        "What humans finished and proved",
         [
-            "36 Vitest tests plus three Playwright interaction and visual journeys.",
-            "GitHub Actions runs typecheck, build, Chromium and evidence retention.",
-            "Railway uses one healthy deployment, healthchecks and path-filtered updates.",
-            "Dark and light desktop, 390 px mobile, reference modal and GLB verified.",
+            "Manual V2 refinement corrected the bow, pod, chains, mechanics, controls and UI.",
+            "The runtime added selection, real pivots, two-button Fire/Load logic and GLB export.",
+            "Strict coverage passed at 27/27 parts, plus 36/36 unit and 3/3 browser tests.",
+            "GitHub and Railway turned the audited reconstruction into a public live product.",
         ],
         margin + 2 * (section_w + section_gap),
         section_y,
         section_w,
         section_h,
+        GOLD,
     )
 
     footer_y = 26
@@ -405,10 +498,10 @@ def build_pdf(output: Path, live_image: Path) -> None:
     draw_panel(c, margin, footer_y, page_width - 2 * margin, footer_h, fill=BLACK)
     c.setFillColor(CORAL)
     c.setFont("Helvetica-Bold", 6.5)
-    c.drawString(margin + 13, footer_y + footer_h - 17, "TRUST BOUNDARY")
+    c.drawString(margin + 13, footer_y + footer_h - 17, "WHY THIS MATTERS TO A CTO")
     draw_wrapped(
         c,
-        "Single-image reconstruction: hidden geometry is an informed approximation. Projectile travel is deterministic animation, not rigid-body physics. The GLB omits procedural roughness DataTextures. No database, API key or runtime secret is required.",
+        "img2threejs made the process inspectable: specifications, evidence, pass state and correction limits survive the conversation. The plugin did not claim success when its gate failed. Human judgment resumed the work explicitly, while the production tests verify a different claim: that the shipped system works.",
         margin + 13,
         footer_y + footer_h - 31,
         page_width - 2 * margin - 105,
